@@ -16,16 +16,12 @@ class BaseController {
         // common logic
     }
 
-    function getForm() {
-        return $this -> form;
-    }
-
-    function getLayout() {
-        return $this -> layout;
-    }
-
-    function getView() {
-        return $this -> view;
+    function render() {
+        $this -> action();
+        $form = $this -> form;
+        $layout = $this -> layout;
+        $view = $this -> view;
+        require_once('page/layout/base.php');
     }
 
 }

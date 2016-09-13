@@ -9,17 +9,15 @@
         }
     }
 
-    $mapper = new URLMapperModel();
-
     try {
         $path = explode(Properties::PATH_DIV, parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
         $controller_name = ucwords($path[1]).Properties::get(Properties::FILE_EXT_CONTROLLER);
-        $mapper -> setController(new $controller_name());
+        $controller = new $controller_name();
     } catch (Exception $e) {
         console($e);
-        $mapper -> setController(new BaseController());
+        $controller = new BaseController();
     }
 
-    $mapper -> view()
+    $controller -> render();
 
 ?>
