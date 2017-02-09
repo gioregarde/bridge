@@ -1,12 +1,11 @@
 <?php
 
-class HelloForm extends BaseForm {
+class SayHelloRequest extends BaseRequest {
 
-    private $name;
+    protected $name;
 
     function __construct() {
         parent::__construct();
-        $this -> name = $this -> getParam("name");
     }
 
     function setName($par) {
@@ -17,9 +16,9 @@ class HelloForm extends BaseForm {
         return $this -> name;
     }
 
-    // do validation
     function valid() {
-        return $this -> name != null;
+        parent::addError(ErrorUtil::isRequired('Name', $this -> name));
+        return !parent::hasErrors();
     }
 
 }
